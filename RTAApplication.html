@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <script type = "text/javascript" src = "js/InfoParser.js">
+  </script>
+</head>
+  <title>RTA Application Form</title>
+  <h3> RTA Application Form </h3>
+  <p>Thank you for your interest in working for RushTeamApparel - official merchandise
+supplier for the Washington Interscholastic Activities Association.</p>
+<p>RushTeamApparel has two goals in working with college age students:</p>
+<p>1. To help students reach their goals.</p>
+<p>2. To help run our mobile retail apparel sales booths.</p>
+<p>Our events are generally happening during sports or scholastic activities on Fridays and
+Saturdays in the months of November, January, February, March, and May. Please see the
+exact dates by going to WIAA.com and clicking on "Tournaments".</p>
+<p>Generally speaking, college students work with RushTeamApparel because they can make
+$200 to $350 per event with bonus opportunities available.</p>
+<p>Thank you and we look forward to seeing your application.</p>
+<form id = "application" action = "http://152.117.219.199:5488" method = "post">
+  First Name:<br>
+  <input type = "text" name = "firstName"/><br>
+  Last Name:<br>
+  <input type = "text" name = "lastName"/><br>
+  Email:<br>
+  <input type = "text" name = "Email"/><br>
+  Phone Number:<br>
+  <input type = "text" name = "PhoneNumber"/><br><br>
+  Who referred you to RushTeamApparel?<br>
+  <div id = "div1">
+  Facebook Ad
+  <input type = "radio" name = "ref" value = "FacebookReferral" onclick = "removeReferralInfo()"/><br>
+  Friend/Family
+  <input type = "radio" name = "ref" value = "FFReferral" onclick = "displayReferralInfo()"/><br>
+  Current Employee
+  <input id = "lastRef" type = "radio" name = "ref" value = "EmployeeReferral" onclick = "displayReferralInfo()"/><br>
+  <br>
+</div>
+
+I have access to transportation <input type = "radio" name = "transportation" value = "yes"/>Yes
+<input type = "radio" name = "transportation" value = "no"/>No<br><br>
+
+What year in school are you?<br>
+<input type = "text" name = "YearInSchool"/><br><br>
+Which High School did you attend?<br>
+<input type = "text" name = "HighSchoolAttended"/><br>
+What Year did you graduate?<br>
+<input type = "text" name = "GradYear"/><br><br>
+
+
+Did you participate in any activites in High School?<input type = "radio" name = "HSparticipation" onclick = "displaySports()"/>Yes
+<input type = "radio" name = "HSparticipation" onclick = "removeSports()"/>No<br><br>
+
+<div id = "Sports">
+</div><br>
+
+How many seasons did you participate in?
+<input type = "number" name = "seasonsParticipated"><br><br>
+
+Are you currently attending a college? If so, which university?<input type = "text" name = "collegeAttended"><br><br>
+
+Major<br><input type = "text" name = "major"><br>
+Minor<br><input type = "text" name = "minor"><br><br>
+
+Did you participate in any activities in college?<br>
+<textarea id = "collegeActivities" name = "collegeActivities">List activities here</textarea><br><br>
+
+Mark all seasons that you will be availble to work<br>
+<input type = "checkbox" name = "availability" value = "Fall">Fall<br>
+<input type = "checkbox" name = "availability" value = "Spring">Spring<br>
+<input type = "checkbox" name = "availability" value = "Winter">Winter<br>
+<br>
+Are you interested in working all events?
+<input type = "radio" name = "AllEvents" value = "yes"/>Yes
+<input type = "radio" name = "AllEvents" value = "no"/>No<br><br>
+Are you interested in working on pre and post event orders, this happens during the week (Monday-Thursday)
+<input type = "radio" name = "PreEvents" value = "yes"/>Yes
+<input type = "radio" name = "PreEvents" value = "no"/>No<br><br>
+Do you prefer team sports or individual sports?
+<input type = "radio" name = "sportPreference" value = "team"/>Team
+<input type = "radio" name = "sportPreference" value = "individual"/>Individual
+<input type = "radio" name = "sportPreference" value = "either"/>Either<br><br>
+Do you prefer to work on your own making garments or working with customers directly?
+<input type = "radio" name = "workPreference" value = "pressing"/>Pressing Garments
+<input type = "radio" name = "workPreference" value = "sales"/>Sales
+<input type = "radio" name = "workPreference" value = "no preference"/>No Preference<br><br>
+Are you willing to participate in paid online and hands on training?
+<input type = "radio" name = "Training" value = "yes"/>Yes
+<input type = "radio" name = "Training" value = "no"/>No<br><br>
+
+<input type = "submit" value = "Submit Application">
+</form>
+
+<script>
+var fallSports = ["Football", "Soccer","Volleyball","Tennis","Cross Country", "Dance & Drill","Cheerleading","Speech & Debate","Swim & Dive"];
+var winterSports = ["Basketball","Wrestling","Swim & Dive","Gymnastics"];
+var springSports = ["Baseball","Softball","Track & Field","Soccer","Tennis","Golf"];
+var referralFlag = false;
+function displayReferralInfo(){
+  if(!referralFlag){
+var x = document.getElementById("lastRef");
+  var refer = document.createElement("input");
+  refer.setAttribute("id","referralInfo");
+  var text = document.createElement("span");
+  text.setAttribute("id","referralText");
+  text.innerHTML = "Who referred you?";
+  refer.setAttribute("type","text");
+  var element = document.getElementById("div1")
+  element.appendChild(text);
+  element.appendChild(refer);
+  referralFlag = true;
+}
+}
+function removeReferralInfo(){
+  var x = document.getElementById("div1");
+  var child = document.getElementById("referralInfo");
+  x.removeChild(child);
+  child = document.getElementById("referralText");
+  x.removeChild(child);
+  referralFlag = false;
+}
+</script>
+
+<script>
+function removeSports(){
+  var parent = document.getElementById("Sports");
+  var child = document.getElementById("fallSports");
+  parent.removeChild(child);
+  child = document.getElementById("winterSports");
+  parent.removeChild(child);
+  child = document.getElementById("springSports");
+  parent.removeChild(child);
+  check = false;
+}
+</script>
+<script>
+var check = false;
+function displaySports(){
+  if(!check){
+    var element = document.getElementById("Sports");
+    //Create Fall sports list
+    var fSports = document.createElement("div");
+    var text = document.createElement("b");
+    text.innerHTML = "Fall Sports";
+    fSports.setAttribute("id", "fallSports");
+    fSports.setAttribute("name","fallSports");
+    fSports.appendChild(text);
+    fSports.appendChild(document.createElement("br"));
+    element.appendChild(fSports);
+    //Create Winter sports list
+    var wSports = document.createElement("div");
+    var text = document.createElement("b");
+    text.innerHTML = "Winter Sports";
+    wSports.setAttribute("id", "winterSports");
+    wSports.setAttribute("name","winterSports");
+    wSports.appendChild(text);
+    wSports.appendChild(document.createElement("br"));
+    element.appendChild(wSports);
+    //Create Spring sports List
+    var sSports = document.createElement("div");
+    var text = document.createElement("b");
+    text.innerHTML = "Spring Sports";
+    sSports.setAttribute("id", "springSports");
+    sSports.setAttribute("name","springSports");
+    sSports.appendChild(text);
+    sSports.appendChild(document.createElement("br"));
+    element.appendChild(sSports);
+
+for(var i = 0; i < fallSports.length;i++){
+  var input = document.createElement("input");
+  var text = document.createElement("label");
+  var t = document.createTextNode(fallSports[i]);
+  input.setAttribute("id",fallSports[i]);
+  input.setAttribute("type","checkbox");
+  input.setAttribute("name","fallSports");
+  input.setAttribute("value",fallSports[i]);
+  text.setAttribute("for",fallSports[i]);
+  text.appendChild(t);
+  var element = document.getElementById("fallSports");
+  element.appendChild(input);
+  element.appendChild(text);
+  element.appendChild(document.createElement("br"));
+}
+element.appendChild(document.createElement("br"));
+
+for(var i = 0; i < winterSports.length;i++){
+  var input = document.createElement("input");
+  var text = document.createElement("label");
+  var t = document.createTextNode(winterSports[i]);
+  input.setAttribute("id",winterSports[i]);
+  input.setAttribute("type","checkbox");
+  input.setAttribute("name","winterSports");
+  input.setAttribute("value",winterSports[i]);
+  text.setAttribute("for",winterSports[i]);
+  text.appendChild(t);
+  var element = document.getElementById("winterSports");
+  element.appendChild(input);
+  element.appendChild(text);
+  element.appendChild(document.createElement("br"));
+}
+element.appendChild(document.createElement("br"));
+
+for(var i = 0; i < springSports.length;i++){
+  var input = document.createElement("input");
+  var text = document.createElement("label");
+  var t = document.createTextNode(springSports[i]);
+  input.setAttribute("id",springSports[i]);
+  input.setAttribute("type","checkbox");
+  input.setAttribute("name","springSports");
+  input.setAttribute("value",springSports[i]);
+  text.setAttribute("for",springSports[i]);
+  text.appendChild(t);
+  var element = document.getElementById("springSports");
+  element.appendChild(input);
+  element.appendChild(text);
+  element.appendChild(document.createElement("br"));
+}
+element.appendChild(document.createElement("br"));
+}
+check = true;
+}
+</script>
+
+</html>
